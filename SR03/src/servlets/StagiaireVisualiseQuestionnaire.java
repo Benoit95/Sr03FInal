@@ -3,8 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +14,6 @@ import beans.Question;
 import beans.Questionnaire;
 import beans.Reponse;
 import beans.Utilisateur;
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.ParcoursDao;
 import dao.QuestionDAO;
@@ -25,8 +22,7 @@ import dao.ReponseDAO;
 
 public class StagiaireVisualiseQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/StagiaireVisualiseQuestionnaire.jsp";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Stagiaire/StagiaireVisualiseQuestionnaire.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String PARAM_QUESTIONNAIRE = "IDquestionnaire";
 	
@@ -61,9 +57,6 @@ public class StagiaireVisualiseQuestionnaire extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
 		
-		// Si l'utilisateur connecté est bien un stagiaire
-		if (user_co != null && user_co.getAdmin() == false){
-
 			// Récupération du questionnaire a visualiser
 			String questionnaireIDS = getValeurParametre( request, PARAM_QUESTIONNAIRE);
 
@@ -107,12 +100,9 @@ public class StagiaireVisualiseQuestionnaire extends HttpServlet {
 
 			/* Affichage du questionnaire (jsp) */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -23,13 +23,11 @@ import forms.QuestionnaireForm;
 
 public class SRecherche extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE_USER = "/WEB-INF/GestionUsers.jsp";
-	public static final String AFFICHAGE_QUESTIONNAIRE = "/WEB-INF/GestionQuestionnaires.jsp";
-	public static final String AFFICHAGE_QUESTION = "/WEB-INF/GestionQuestions.jsp";
-	public static final String AFFICHAGE_REPONSE = "/WEB-INF/GestionReponses.jsp";
+	public static final String AFFICHAGE_USER = "/Admin/GestionUsers.jsp";
+	public static final String AFFICHAGE_QUESTIONNAIRE = "/Admin/GestionQuestionnaires.jsp";
+	public static final String AFFICHAGE_QUESTION = "/Admin/GestionQuestions.jsp";
+	public static final String AFFICHAGE_REPONSE = "/Admin/GestionReponses.jsp";
 
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String R_TYPE = "type";
@@ -79,7 +77,7 @@ public class SRecherche extends HttpServlet {
 		String type = (String) session.getAttribute( R_TYPE );	// Récupération du type (questionnaire/question/reponse)
 		int ID = (int) session.getAttribute( R_ID ); // Récupération de ID nécessaire(questionnaire/question)
 
-		int page = (int) session.getAttribute(PAGE);
+		//int page = (int) session.getAttribute(PAGE);
 		int nb_quest_affich = (int) session.getAttribute(ATT_SESSION_NB_QUESTIONNAIRE_PAGE);
 
 		// Si on recherche un questionnaire

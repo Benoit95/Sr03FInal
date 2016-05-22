@@ -23,26 +23,26 @@
                		<!-- Administrateur -->
                		<c:if test="${sessionScope.sessionUtilisateur.admin == true}">          
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="deconnexion">Se deconnecter</a></li>
+		                   <li><a href="/SR03/deconnexion">Se deconnecter</a></li>
 		               </ul>
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="<c:url value="GestionUser"><c:param name="page" value="1" /></c:url>">Gérer les utilisateurs</a></li>
+		                   <li><a href="<c:url value="/Admin/GestionUser"><c:param name="page" value="1" /></c:url>">Gérer les utilisateurs</a></li>
 		               </ul>  
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="<c:url value="GestionQuestionnaires"><c:param name="page" value="1" /></c:url>">Gérer les questionnaires</a></li>
+		                   <li><a href="<c:url value="/Admin/GestionQuestionnaires"><c:param name="page" value="1" /></c:url>">Gérer les questionnaires</a></li>
 		               </ul>  
 		            </c:if>
 		            
 		            <!-- Stagiaire -->
                		<c:if test="${sessionScope.sessionUtilisateur.admin == false}">          
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="deconnexion">Se deconnecter</a></li>
+		                   <li><a href="/SR03/deconnexion">Se deconnecter</a></li>
 		               </ul>
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="<c:url value="StagiaireListeQuestionnaire"><c:param name="page" value="1" /></c:url>">Questionnaires</a></li>
+		                   <li><a href="<c:url value="/Stagiaire/StagiaireListeQuestionnaire"><c:param name="page" value="1" /></c:url>">Questionnaires</a></li>
 		               </ul>  
 		               <ul class="right hide-on-med-and-down">
-		                   <li><a href="<c:url value="StagiaireListeParcours"><c:param name="page" value="1" /></c:url>">Mes résultats</a></li>
+		                   <li><a href="<c:url value="/Stagiaire/StagiaireListeParcours"><c:param name="page" value="1" /></c:url>">Mes résultats</a></li>
 		               </ul>  
 		            </c:if>
 		            

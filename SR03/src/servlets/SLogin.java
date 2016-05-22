@@ -19,8 +19,8 @@ public class SLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String LOGIN          = "/WEB-INF/login.jsp";
-    public static final String ADMIN          = "admin";
-    public static final String STAGIAIRE      = "/stagiaire";
+    public static final String ADMIN          = "Admin/admin";
+    public static final String STAGIAIRE      = "Stagiaire/stagiaire";
     public static final String CHAMP_EMAIL  = "emailUser";
     public static final String CHAMP_PASS   = "mdpUser";
     
@@ -117,10 +117,9 @@ public class SLogin extends HttpServlet {
 
         	
         	if (connectedUser.getAdmin() == true)
-        		response.sendRedirect( ADMIN );
-        		//this.getServletContext().getRequestDispatcher( ADMIN ).forward( request, response );
+        		response.sendRedirect(ADMIN);
         	else
-        		this.getServletContext().getRequestDispatcher( STAGIAIRE ).forward( request, response );
+        		response.sendRedirect(STAGIAIRE );
         }
         	
 	}

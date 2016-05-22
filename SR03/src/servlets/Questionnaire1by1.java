@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import beans.Question;
 import beans.Questionnaire;
-import beans.Utilisateur;
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.QuestionDAO;
 import dao.QuestionnaireDAO;
@@ -22,14 +20,12 @@ import dao.ReponseDAO;
 
 public class Questionnaire1by1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/Questionnaire1by1.jsp";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Admin/Questionnaire1by1.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String PARAM_QUESTIONNAIRE = "IDquestionnaire";
 	public static final String ATT_QUESTIONNAIRE = "questionnaire";
 	public static final String PAGE = "page";
 	public static final String PAGEMAX = "pageMax";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
 	public static final String ATT_SESSION_NB_QUESTION_PAGE = "sessionQuestionPage";
 
 	private QuestionnaireDAO     questionnaireDAO;
@@ -51,10 +47,6 @@ public class Questionnaire1by1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session*/
 		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-		
-		// Si l'utilisateur connecté est bien un admin
-		if (user_co != null && user_co.getAdmin() == true){
 
 			// Récupération du questionnaire a visualiser
 			String questionnaireIDS = getValeurParametre( request, PARAM_QUESTIONNAIRE);
@@ -93,12 +85,9 @@ public class Questionnaire1by1 extends HttpServlet {
 
 			/* Affichage du questionnaire (jsp) */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

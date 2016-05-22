@@ -26,7 +26,7 @@
                 </c:if>
 		         
 		     </div>
-            <form method="post" action="login">
+            <form method="post" action="/SR03/login">	
                 <fieldset>
                     <legend>Se connecter</legend>
                     

@@ -9,10 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import beans.Questionnaire;
-import beans.Utilisateur;
 import dao.DAOException;
 import dao.DAOFactory;
 import dao.QuestionnaireDAO;
@@ -20,10 +17,8 @@ import forms.QuestionnaireForm;
 
 public class SModifQuestionnaires extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/ModifQuestionnaires.jsp";
-	public static final String AFFICHAGEGestion          = "/WEB-INF/GestionQuestionnaires.jsp";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Admin/ModifQuestionnaires.jsp";
+	public static final String AFFICHAGEGestion          = "/Admin/GestionQuestionnaires.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String CHAMP_ID_M  = "IdM";
@@ -52,12 +47,6 @@ public class SModifQuestionnaires extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération de la session*/
-		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-
-		// Si l'utilisateur connecté est bien un admin
-		if (user_co != null && user_co.getAdmin() == true){
 
 			/* Récupération des paramètres (si suppression/modification demandé) */
 			String QuestIDToModifS = getValeurParametre( request, PARAM_QUEST_TO_MODIF);
@@ -80,8 +69,6 @@ public class SModifQuestionnaires extends HttpServlet {
 
 			/* Affichage de la page du formulaire de modification */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

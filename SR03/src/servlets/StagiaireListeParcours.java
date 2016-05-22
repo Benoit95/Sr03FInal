@@ -2,11 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import beans.Questionnaire;
 import beans.Utilisateur;
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.ParcoursDao;
 import dao.QuestionnaireDAO;
@@ -23,10 +19,9 @@ import forms.QuestionnaireForm;
 
 public class StagiaireListeParcours extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/StagiaireListeParcours.jsp";
-	public static final String VISU_PARCOURS          = "StagiaireVisualiserParcours";
+	public static final String AFFICHAGE          = "/Stagiaire/StagiaireListeParcours.jsp";
+	public static final String VISU_PARCOURS          = "/Stagiaire/StagiaireVisualiseQuestionnaire.jsp";
 	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String PARAM_QUESTIONNAIRE_ID   = "QuestionnaireID";
@@ -61,10 +56,7 @@ public class StagiaireListeParcours extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
 
-		// Si l'utilisateur connecté est bien un stagiaire
-		if (user_co != null && user_co.getAdmin() == false){
-
-			int pageI;
+			int pageI = 1;
 			int nb_quest_affich = (int) session.getAttribute(ATT_SESSION_NB_QUESTIONNAIRE_PAGE);
 
 			/* Récupération des paramètres (si le stagiaire veut visualiser son parcours ) */
@@ -118,8 +110,6 @@ public class StagiaireListeParcours extends HttpServlet {
 
 			/* Affichage de la page de d'affichage questionnaire */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

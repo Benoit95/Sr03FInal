@@ -14,9 +14,7 @@ import javax.servlet.http.HttpSession;
 import beans.Parcours;
 import beans.Question;
 import beans.Questionnaire;
-import beans.Reponse;
 import beans.Utilisateur;
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.ParcoursDao;
 import dao.QuestionDAO;
@@ -25,8 +23,10 @@ import dao.ReponseDAO;
 
 public class StagiaireEffectuerQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/StagiaireEffectuerQuestionnaire.jsp";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Stagiaire/StagiaireEffectuerQuestionnaire.jsp";
+	public static final String AFFICHAGE_LISTPARCOURS          = "StagiaireListeParcours?page=1";
+	
+	
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String PARAM_QUESTIONNAIRE = "QuestionnaireID";
 	public static final String ATT_QUESTIONNAIRE = "questionnaire";
@@ -62,10 +62,6 @@ public class StagiaireEffectuerQuestionnaire extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session*/
 		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-
-		// Si l'utilisateur connecté est bien un stagiaire
-		if (user_co != null && user_co.getAdmin() == false){
 
 			int pageI = 0;
 			int questionnaireID = 0;
@@ -122,8 +118,6 @@ public class StagiaireEffectuerQuestionnaire extends HttpServlet {
 
 			/* Affichage du questionnaire (jsp) */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	@SuppressWarnings("unchecked")
@@ -184,8 +178,12 @@ public class StagiaireEffectuerQuestionnaire extends HttpServlet {
 					parcoursDAO.creer(L_Parcours.get(i));	
 				}
 				
+				
 				// On renvoie l'utilisateur sur la page des "résultats"
-				this.getServletContext().getRequestDispatcher( "/WEB-INF/StagiaireListeParcours.jsp" ).forward( request, response );
+				pageI = 1;
+				session.setAttribute( PAGE, pageI );
+				
+				response.sendRedirect( AFFICHAGE_LISTPARCOURS );
 				
 				
 			}else{

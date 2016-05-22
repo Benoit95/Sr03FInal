@@ -23,7 +23,6 @@
 		                <input class="col m6 s12 waves-effect waves-light btn-large" type="submit" value="Rechercher"  />
 	                </div>
                 </div>
-                   
                
             </form>
         </fieldset>

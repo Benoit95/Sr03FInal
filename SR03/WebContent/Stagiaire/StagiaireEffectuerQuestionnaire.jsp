@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		
-		<%@ include file="NavBar.jsp" %>
+		<%@ include file="/WEB-INF/NavBar.jsp" %>
 		<div class="container">
 		     
 		<h3 class="header col s12 orange-text">Qestionnaire n° ${ questionnaire.id } : "${ questionnaire.sujet }"</h3>
@@ -19,34 +19,27 @@
 	    <div class="row">
 	    <fieldset>
              <legend>${ question.text }</legend>
-	    	 <form method="post" action="RepondreQuestion">
+	    	 <form method="post" action="StagiaireEffectuerQuestionnaire">
 
 	                   <c:forEach items="${ question.LReponses }" var="reponse" varStatus="boucle">
 	                   		<p>
-		                    <input type="radio" id="${ reponse.id }" name="${ question.id }" value="${ reponse.id }"/>
-	 						<label class="active" for="${ reponse.id }">${ reponse.text } ${ reponse.estValide == 'oui' ? "(Bonne réponse)" : ""  } </label>
+		                    <input type="radio" id="${ reponse.id }" name="reponse" value="${ reponse.id }"/>
+	 						<label class="active" for="${ reponse.id }">${ reponse.text } </label>
 	 						</p>
 	 					</c:forEach>
 	 					<br>
-	 					<%-- <input type="submit" value="Valider"  /> --%>
+	 					<input type="submit" value="Valider"  />
 	                           
 	            </form>
 	            </fieldset>
 	            <br>
 	            </div>
 	   </c:forEach>
-	   
-		<c:if test="${page > 1}">
-	   		<a href="<c:url value="Questionnaire1by1"><c:param name="IDquestionnaire" value="${ questionnaire.id }" /><c:param name="page" value="${ page - 1 }" /></c:url>">Précédent</a>
-        </c:if>
-        <c:if test="${page < pageMax }">
-      	 <a href="<c:url value="Questionnaire1by1"><c:param name="IDquestionnaire" value="${ questionnaire.id }" /><c:param name="page" value="${ page + 1 }" /></c:url>">Suivant</a>
-      	</c:if>
       	
 	   </div>
 	  	
 	   
-	   <%@ include file="footer.jsp" %>
+	   <%@ include file="/WEB-INF/footer.jsp" %>
 	   
 	</body>
 </html>

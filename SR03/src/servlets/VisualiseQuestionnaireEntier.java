@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Question;
 import beans.Questionnaire;
-import dao.DAOException;
 import dao.DAOFactory;
 import dao.QuestionDAO;
 import dao.QuestionnaireDAO;
@@ -19,7 +18,7 @@ import dao.ReponseDAO;
 
 public class VisualiseQuestionnaireEntier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/VisualiseQuestionnaireEntier.jsp";
+	public static final String AFFICHAGE          = "/Admin/VisualiseQuestionnaireEntier.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 	public static final String PARAM_QUESTIONNAIRE = "IDquestionnaire";
 	public static final String ATT_QUESTIONNAIRE = "questionnaire";

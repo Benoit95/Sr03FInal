@@ -10,7 +10,7 @@
     </head>
     <body>
     
-    	<%@ include file="NavBar.jsp" %>
+    	<%@ include file="/WEB-INF/NavBar.jsp" %>
     
         <%@ include file="MenuAdmin.jsp" %>
         
@@ -56,10 +56,10 @@
                     <td><c:out value="${ mapUsers.statut }"/></td>
                     <%-- Lien vers la servlet de suppression, avec passage du nom du User en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
-                        <a href="<c:url value="/GestionUser"><c:param name="mailUser_to_delete" value="${ mapUsers.mail }" /></c:url>">Supprimer</a>
+                        <a href="<c:url value="GestionUser"><c:param name="mailUser_to_delete" value="${ mapUsers.mail }" /></c:url>">Supprimer</a>
                     </td>
                     <td class="action">
-                        <a href="<c:url value="/GestionUser"><c:param name="mailUser_to_modif" value="${ mapUsers.mail }" /></c:url>">Modifier</a>
+                        <a href="<c:url value="GestionUser"><c:param name="mailUser_to_modif" value="${ mapUsers.mail }" /></c:url>">Modifier</a>
                     </td>
                 </tr>
                 </c:forEach>
@@ -69,10 +69,10 @@
         </c:choose>
 
         <c:if test="${sessionScope.page > 1}">
-	   		<a href="<c:url value="/GestionUser"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
+	   		<a href="<c:url value="GestionUser"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
         </c:if>
         <c:if test="${sessionScope.page < sessionScope.pageMax }">
-      	 <a href="<c:url value="/GestionUser"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
+      	 <a href="<c:url value="GestionUser"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
       	</c:if>
         
         
@@ -156,7 +156,7 @@
            </fieldset>
            <p class="erreur">${resultat}</p>
            </div>
-            <%@ include file="footer.jsp" %>
+            <%@ include file="/WEB-INF/footer.jsp" %>
         
     </body>
 </html>

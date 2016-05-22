@@ -11,14 +11,14 @@
 	</head>
 	<body>
 		
-		<%@ include file="NavBar.jsp" %>
+		<%@ include file="/WEB-INF/NavBar.jsp" %>
 		<div class="container">
 		     
 		<h3 class="header col s12 orange-text">Qestionnaire n° ${ questionnaire.id } : "${ questionnaire.sujet }"</h3>
 	    <c:forEach items="${ questionnaire.LQuestions }" var="question" varStatus="boucle">
 	    <div class="row">
 	    <fieldset>
-             <legend>${ question.text }</legend>
+                <legend>${ question.text }</legend>
 	    	 <form method="post" action="RepondreQuestion">
 
 	                   <c:forEach items="${ question.LReponses }" var="reponse" varStatus="boucle">
@@ -28,6 +28,7 @@
 	 						</p>
 	 					</c:forEach>
 	 					<br>
+	 					<input type="submit" value="Valider"  />
 	                           
 	            </form>
 	            </fieldset>
@@ -35,13 +36,10 @@
 	            </div>
 	   </c:forEach>
 	   
-	   <p>Vous avez fait un score de ${ score } sur ${nb_questions}. </p>
-	   <p>Pour une durée de : ${ duree } millisecondes</p>
-      	
 	   </div>
-	  	
+	  
 	   
-	   <%@ include file="footer.jsp" %>
+	   <%@ include file="/WEB-INF/footer.jsp" %>
 	   
 	</body>
 </html>

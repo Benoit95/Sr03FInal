@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Question;
-import beans.Utilisateur;
 import dao.DAOException;
 import dao.DAOFactory;
 import dao.QuestionDAO;
@@ -22,9 +21,7 @@ import forms.QuestionForm;
 
 public class SGestionQuestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/GestionQuestions.jsp";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Admin/GestionQuestions.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String CHAMP_IDQUESTIONNAIRE_A = "IdQuestionnaire";
@@ -63,10 +60,6 @@ public class SGestionQuestions extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session*/
 		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-
-		// Si l'utilisateur connecté est bien un admin
-		if (user_co != null && user_co.getAdmin() == true){
 
 			String resultat ="";
 			int pageI;
@@ -123,8 +116,6 @@ public class SGestionQuestions extends HttpServlet {
 
 			/* Affichage de la page de d'affichage question */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 
 	}
 
@@ -193,12 +184,6 @@ public class SGestionQuestions extends HttpServlet {
 
 		/* Actualisation de la page */
 		this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-	}
-
-	// Déclenche une erreur si Text deja utilisé
-	private void QuestDejaUsed( String Text , long IDquestionnaire ) throws DAOException{
-		if(QuestionDAO.trouver_ByText(Text, IDquestionnaire) != null)
-			throw new DAOException( "Ce Text de question est déjà utilisé dans ce questionnaire" );
 	}
 
 	// Méthode utilitaire qui retourne null si un paramètre est vide, et son contenu sinon.

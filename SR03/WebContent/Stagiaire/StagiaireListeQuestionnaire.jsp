@@ -4,23 +4,23 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Liste des parcours</title>
+        <title>Liste des questionnaires existants</title>
 		  <link href="<c:url value="/inc/materialize.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
 		  <link href="<c:url value="/inc/style.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
     
-    	<%@ include file="NavBar.jsp" %>
+    	<%@ include file="/WEB-INF/NavBar.jsp" %>
 
         <div class="container">
         <fieldset>
-        <h5 class="header col s12 light">Liste des Parcours</h5>
+        <h5 class="header col s12 light">Liste des questionnaires</h5>
         
         <div id="corps">
         <c:choose>
-            <%-- Si aucun questionnaire n'existe, affichage d'un message par défaut. --%>
+            <%-- Si aucun questionnaire n'existe en session, affichage d'un message par défaut. --%>
             <c:when test="${ empty L_questionnaires }">
-                <p class="erreur">Aucun questionnaire n'a été fait pour le moment.</p>
+                <p class="erreur">Aucun questionnaire enregistré.</p>
             </c:when>
             <%-- Sinon, affichage du tableau. --%>
             <c:otherwise>
@@ -29,7 +29,7 @@
                     <th>ID</th>
                     <th>Sujet</th>
                     <th>Statut</th>
-                    <th class="action">Visualiser le questionnaire</th>                 
+                    <th class="action">Effectuer le questionnaire</th>                 
                 </tr></thead>
                 <%-- Parcours de la Map des Questionnaires dans la requete, et utilisation de l'objet varStatus. --%>
                 <tbody>
@@ -42,7 +42,7 @@
                     <td><c:out value="${ mapQuestionnaires.statut }"/></td>
                     <%-- Lien vers les servlets de gestions--%>
                     <td class="action">
-                        <a href="<c:url value="StagiaireVisualiseQuestionnaire"><c:param name="IDquestionnaire" value="${ mapQuestionnaires.id }" /><c:param name="page" value="1" /></c:url>">Visualiser</a>
+                        <a href="<c:url value="/Stagiaire/StagiaireEffectuerQuestionnaire"><c:param name="page" value="1" /><c:param name="QuestionnaireID" value="${ mapQuestionnaires.id }" /></c:url>">Lancer</a>
                     </td>
                 </tr>
                 </c:forEach>
@@ -52,10 +52,10 @@
         </c:choose>
         
         <c:if test="${sessionScope.page > 1}">
-	   		<a href="<c:url value="StagiaireListeParcours"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
+	   		<a href="<c:url value="/Stagiaire/StagiaireListeQuestionnaire"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
         </c:if>
         <c:if test="${sessionScope.page < sessionScope.pageMax }">
-      	 <a href="<c:url value="StagiaireListeParcours"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
+      	 <a href="<c:url value="/Stagiaire/StagiaireListeQuestionnaire"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
       	</c:if>
         
         
@@ -63,7 +63,7 @@
         </fieldset>
         </div>
         
-        <%@ include file="footer.jsp" %>
+        <%@ include file="/WEB-INF/footer.jsp" %>
         
     </body>
 </html>

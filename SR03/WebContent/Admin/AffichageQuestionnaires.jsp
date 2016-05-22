@@ -9,9 +9,10 @@
 		  <link href="<c:url value="/inc/style.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
-    
-    	<%@ include file="NavBar.jsp" %>
-
+        <%@ include file="MenuAdmin.jsp" %>
+        
+        <%@ include file="RechercheForm.jsp" %>
+        
         <div class="container">
         <fieldset>
         <h5 class="header col s12 light">Liste des questionnaires</h5>
@@ -29,7 +30,10 @@
                     <th>ID</th>
                     <th>Sujet</th>
                     <th>Statut</th>
-                    <th class="action">Effectuer le questionnaire</th>                 
+                    <th class="action">Questions</th>
+                    <th class="action">Suppression</th>
+                    <th class="action">Modification</th>
+                    <th class="action">Visualisation</th>                  
                 </tr></thead>
                 <%-- Parcours de la Map des Questionnaires dans la requete, et utilisation de l'objet varStatus. --%>
                 <tbody>
@@ -42,7 +46,16 @@
                     <td><c:out value="${ mapQuestionnaires.statut }"/></td>
                     <%-- Lien vers les servlets de gestions--%>
                     <td class="action">
-                        <a href="<c:url value="StagiaireEffectuerQuestionnaire"><c:param name="page" value="1" /><c:param name="QuestionnaireID" value="${ mapQuestionnaires.id }" /></c:url>">Lancer</a>
+                        <a href="<c:url value="/Admin/GestionQuestions"><c:param name="page" value="1" /><c:param name="QuestionnaireID" value="${ mapQuestionnaires.id }" /></c:url>">Gérer</a>
+                    </td>
+                    <td class="action">
+                        <a href="<c:url value="/Admin/GestionQuestionnaires"><c:param name="QuestionnaireID_to_delete" value="${ mapQuestionnaires.id }" /></c:url>">Supprimer</a>
+                    </td>
+                    <td class="action">
+                        <a href="<c:url value="/Admin/ModifQuestionnaires"><c:param name="QuestionnaireID_to_modif" value="${ mapQuestionnaires.id }" /></c:url>">Modifier</a>
+                    </td>
+                    <td class="action">
+                        <a href="<c:url value="/Admin/Questionnaire1by1"><c:param name="IDquestionnaire" value="${ mapQuestionnaires.id }" /><c:param name="page" value="1" /></c:url>">Visualiser</a>
                     </td>
                 </tr>
                 </c:forEach>
@@ -52,18 +65,16 @@
         </c:choose>
         
         <c:if test="${sessionScope.page > 1}">
-	   		<a href="<c:url value="StagiaireListeQuestionnaire"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
+	   		<a href="<c:url value="/Admin/GestionQuestionnaires"><c:param name="page" value="${ sessionScope.page - 1 }" /></c:url>">Précédent</a>
         </c:if>
         <c:if test="${sessionScope.page < sessionScope.pageMax }">
-      	 <a href="<c:url value="StagiaireListeQuestionnaire"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
+      	 <a href="<c:url value="/Admin/GestionQuestionnaires"><c:param name="page" value="${ sessionScope.page + 1 }" /></c:url>">Suivant</a>
       	</c:if>
         
         
         </div>
         </fieldset>
         </div>
-        
-        <%@ include file="footer.jsp" %>
         
     </body>
 </html>

@@ -10,7 +10,7 @@
     </head>
     <body>
     	
-    	<%@ include file="NavBar.jsp" %>
+    	<%@ include file="/WEB-INF/NavBar.jsp" %>
     
         <%@ include file="AffichageQuestionnaires.jsp" %>
         
@@ -48,7 +48,7 @@
            <p class="erreur">${resultat}</p>
            </div>
             
-             <%@ include file="footer.jsp" %>
+             <%@ include file="/WEB-INF/footer.jsp" %>
         
     </body>
 </html>

@@ -9,10 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import beans.Reponse;
-import beans.Utilisateur;
 import dao.DAOException;
 import dao.DAOFactory;
 import dao.ReponseDAO;
@@ -20,10 +17,8 @@ import forms.ReponseForm;
 
 public class SModifReponses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/ModifReponses.jsp";
-	public static final String AFFICHAGEGestion   = "/WEB-INF/GestionReponses.jsp";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Admin/ModifReponses.jsp";
+	public static final String AFFICHAGEGestion   = "/Admin/GestionReponses.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String CHAMP_IDQuestion_A = "IdQuestion";
@@ -56,12 +51,6 @@ public class SModifReponses extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* Récupération de la session*/
-		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-
-		// Si l'utilisateur connecté est bien un admin
-		if (user_co != null && user_co.getAdmin() == true){
 
 			/* Récupération des paramètres (si modification demandé) */
 			String QuestIDToModifS = getValeurParametre( request, PARAM_QUEST_TO_MODIF);
@@ -88,8 +77,7 @@ public class SModifReponses extends HttpServlet {
 
 			/* Affichage de la page du formulaire de modification */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -165,12 +153,6 @@ public class SModifReponses extends HttpServlet {
 		if(ReponseDAO.trouver_ByID(id) == null)
 			throw new DAOException( "Aucun Reponse correspondant à cet ID" );
 	}
-
-	// Déclenche une erreur si Text deja utilisé
-	private void QuestDejaUsed( String Text, long idQuestion ) throws DAOException{
-		if(ReponseDAO.trouver_ByText(Text, idQuestion) != null)
-			throw new DAOException( "Ce Text est déjà utilisé" );
-	}	
 
 	// Déclenche une erreur si une réponse valide est deja définie pour la question
 	private void ReponseCorrecteDejaUsed( long IDQuestion , String estValide ) throws DAOException{

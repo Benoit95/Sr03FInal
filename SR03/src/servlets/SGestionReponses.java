@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Reponse;
-import beans.Utilisateur;
 import dao.DAOException;
 import dao.DAOFactory;
 import dao.ReponseDAO;
@@ -22,9 +21,7 @@ import forms.ReponseForm;
 
 public class SGestionReponses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String AFFICHAGE          = "/WEB-INF/GestionReponses.jsp";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
-	public static final String ACCESSREFUSED = "/RefuseAccess.jsp";
+	public static final String AFFICHAGE          = "/Admin/GestionReponses.jsp";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String CHAMP_IDQuestion_A = "IdQuestion";
@@ -64,10 +61,6 @@ public class SGestionReponses extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération de la session*/
 		HttpSession session = request.getSession();
-		Utilisateur user_co = (Utilisateur) session.getAttribute( ATT_SESSION_USER );
-
-		// Si l'utilisateur connecté est bien un admin
-		if (user_co != null && user_co.getAdmin() == true){
 
 			String resultat ="";
 			int pageI;
@@ -124,8 +117,6 @@ public class SGestionReponses extends HttpServlet {
 			
 			/* Affichage de la page de d'affichage Reponse */
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
-		}else
-			this.getServletContext().getRequestDispatcher( ACCESSREFUSED ).forward( request, response );
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

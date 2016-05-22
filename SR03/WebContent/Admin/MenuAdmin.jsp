@@ -16,8 +16,8 @@
 			<div class="container">
 				    
 			      <div class="collection ">
-			    	<a class="collection-item" href="<c:url value="GestionUser"><c:param name="page" value="1" /></c:url>">Gérer les utilisateurs</a>
-			        <a class="collection-item" href="<c:url value="GestionQuestionnaires"><c:param name="page" value="1" /></c:url>">Gérer les questionnaires</a>
+			    	<a class="collection-item" href="<c:url value="/Admin/GestionUser"><c:param name="page" value="1" /></c:url>">Gérer les utilisateurs</a>
+			        <a class="collection-item" href="<c:url value="/Admin/GestionQuestionnaires"><c:param name="page" value="1" /></c:url>">Gérer les questionnaires</a>
 			      </div>
 		
 				<br><br><br>

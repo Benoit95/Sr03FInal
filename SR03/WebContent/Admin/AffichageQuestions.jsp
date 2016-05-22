@@ -50,13 +50,13 @@
                     <td><c:out value="${ mapQuestions.ordre }"/></td>
                     <%-- Lien vers les servlets de gestions--%>
                     <td class="action">
-                        <a href="<c:url value="GestionReponses"><c:param name="page" value="1" /><c:param name="QuestionID" value="${ mapQuestions.id }" /></c:url>">Gérer</a>
+                        <a href="<c:url value="/Admin/GestionReponses"><c:param name="page" value="1" /><c:param name="QuestionID" value="${ mapQuestions.id }" /></c:url>">Gérer</a>
                     </td>
                     <td class="action">
-                        <a href="<c:url value="GestionQuestions"><c:param name="QuestionnaireID" value="${ mapQuestions.id_questionnaire }" /><c:param name="QuestionID_to_delete" value="${ mapQuestions.id }" /></c:url>">Supprimer</a>
+                        <a href="<c:url value="/Admin/GestionQuestions"><c:param name="QuestionnaireID" value="${ mapQuestions.id_questionnaire }" /><c:param name="QuestionID_to_delete" value="${ mapQuestions.id }" /></c:url>">Supprimer</a>
                     </td>
                     <td class="action">
-                        <a href="<c:url value="ModifQuestions"><c:param name="QuestionnaireID" value="${ mapQuestions.id_questionnaire }" /><c:param name="QuestionID_to_modif" value="${ mapQuestions.id }" /></c:url>">Modifier</a>
+                        <a href="<c:url value="/Admin/ModifQuestions"><c:param name="QuestionnaireID" value="${ mapQuestions.id_questionnaire }" /><c:param name="QuestionID_to_modif" value="${ mapQuestions.id }" /></c:url>">Modifier</a>
                     </td>
                 </tr>
                 </c:forEach>
@@ -67,10 +67,10 @@
         </c:choose>
         
         <c:if test="${sessionScope.page > 1}">
-	   		<a href="<c:url value="GestionQuestions"><c:param name="page" value="${ sessionScope.page - 1 }" /><c:param name="QuestionnaireID" value="${ empty QuestionnaireID ? param.IdQuestionnaire : QuestionnaireID  }" /></c:url>">Précédent</a>
+	   		<a href="<c:url value="/Admin/GestionQuestions"><c:param name="page" value="${ sessionScope.page - 1 }" /><c:param name="QuestionnaireID" value="${ empty QuestionnaireID ? param.IdQuestionnaire : QuestionnaireID  }" /></c:url>">Précédent</a>
         </c:if>
         <c:if test="${sessionScope.page < sessionScope.pageMax }">
-      	 <a href="<c:url value="GestionQuestions"><c:param name="page" value="${ sessionScope.page + 1 }" /><c:param name="QuestionnaireID" value="${ empty QuestionnaireID ? param.IdQuestionnaire : QuestionnaireID  }" /></c:url>">Suivant</a>
+      	 <a href="<c:url value="/Admin/GestionQuestions"><c:param name="page" value="${ sessionScope.page + 1 }" /><c:param name="QuestionnaireID" value="${ empty QuestionnaireID ? param.IdQuestionnaire : QuestionnaireID  }" /></c:url>">Suivant</a>
       	</c:if>
         
         </div>

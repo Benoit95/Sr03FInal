@@ -2,13 +2,59 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>SR03</display-name>
   
-	<session-config> 
-		<session-timeout>30</session-timeout>
-	</session-config>
+  <!--- Temps que l'on garde la session active -->
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  
+  <!--- Listeners -->
   
   <listener>
     <listener-class>config.InitialisationDaoFactory</listener-class>
   </listener>
+  
+  <!--- Filters -->
+  
+  <filter>
+    <filter-name>Set Character Encoding</filter-name>
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignore</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>Set Character Encoding</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+	<filter>
+	    <filter-name>AdminFilter</filter-name>
+	    <filter-class>Filters.AdminFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>AdminFilter</filter-name>
+	    <url-pattern>/Admin/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+	    <filter-name>StagiaireFilter</filter-name>
+	    <filter-class>Filters.StagiaireFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	    <filter-name>StagiaireFilter</filter-name>
+	    <url-pattern>/Stagiaire/*</url-pattern>
+	</filter-mapping>
+  
+  
+  <!--- Servlets -->
+  
   <servlet>
     <servlet-name>SLogin</servlet-name>
     <servlet-class>servlets.SLogin</servlet-class>
@@ -31,7 +77,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SAdmin</servlet-name>
-    <url-pattern>/admin</url-pattern>
+    <url-pattern>/Admin/admin</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SStagiaire</servlet-name>
@@ -39,7 +85,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SStagiaire</servlet-name>
-    <url-pattern>/stagiaire</url-pattern>
+    <url-pattern>/Stagiaire/stagiaire</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SGestionUser</servlet-name>
@@ -47,7 +93,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SGestionUser</servlet-name>
-    <url-pattern>/GestionUser</url-pattern>
+    <url-pattern>/Admin/GestionUser</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SGestionQuestionnaires</servlet-name>
@@ -55,7 +101,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SGestionQuestionnaires</servlet-name>
-    <url-pattern>/GestionQuestionnaires</url-pattern>
+    <url-pattern>/Admin/GestionQuestionnaires</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SModifQuestionnaires</servlet-name>
@@ -63,7 +109,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SModifQuestionnaires</servlet-name>
-    <url-pattern>/ModifQuestionnaires</url-pattern>
+    <url-pattern>/Admin/ModifQuestionnaires</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SGestionQuestions</servlet-name>
@@ -71,7 +117,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SGestionQuestions</servlet-name>
-    <url-pattern>/GestionQuestions</url-pattern>
+    <url-pattern>/Admin/GestionQuestions</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SModifQuestions</servlet-name>
@@ -79,7 +125,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SModifQuestions</servlet-name>
-    <url-pattern>/ModifQuestions</url-pattern>
+    <url-pattern>/Admin/ModifQuestions</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SGestionReponses</servlet-name>
@@ -87,7 +133,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SGestionReponses</servlet-name>
-    <url-pattern>/GestionReponses</url-pattern>
+    <url-pattern>/Admin/GestionReponses</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SModifReponses</servlet-name>
@@ -95,70 +141,62 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SModifReponses</servlet-name>
-    <url-pattern>/ModifReponses</url-pattern>
+    <url-pattern>/Admin/ModifReponses</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>VisualiseQuestionnaireEntier</servlet-name>
     <servlet-class>servlets.VisualiseQuestionnaireEntier</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>VisualiseQuestionnaireEntier</servlet-name>
-    <url-pattern>/VisualiseQuestionnaireEntier</url-pattern>
-  </servlet-mapping>  
- 
+    <url-pattern>/Admin/VisualiseQuestionnaireEntier</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Questionnaire1by1</servlet-name>
     <servlet-class>servlets.Questionnaire1by1</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Questionnaire1by1</servlet-name>
-    <url-pattern>/Questionnaire1by1</url-pattern>
-  </servlet-mapping> 
-  
+    <url-pattern>/Admin/Questionnaire1by1</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>SRecherche</servlet-name>
     <servlet-class>servlets.SRecherche</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SRecherche</servlet-name>
-    <url-pattern>/Recherche</url-pattern>
-  </servlet-mapping> 
-  
+    <url-pattern>/Admin/Recherche</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>StagiaireListeQuestionnaire</servlet-name>
     <servlet-class>servlets.StagiaireListeQuestionnaire</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StagiaireListeQuestionnaire</servlet-name>
-    <url-pattern>/StagiaireListeQuestionnaire</url-pattern>
+    <url-pattern>/Stagiaire/StagiaireListeQuestionnaire</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>StagiaireEffectuerQuestionnaire</servlet-name>
     <servlet-class>servlets.StagiaireEffectuerQuestionnaire</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StagiaireEffectuerQuestionnaire</servlet-name>
-    <url-pattern>/StagiaireEffectuerQuestionnaire</url-pattern>
-  </servlet-mapping> 
-  
-    <servlet>
+    <url-pattern>/Stagiaire/StagiaireEffectuerQuestionnaire</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>StagiaireListeParcours</servlet-name>
     <servlet-class>servlets.StagiaireListeParcours</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StagiaireListeParcours</servlet-name>
-    <url-pattern>/StagiaireListeParcours</url-pattern>
+    <url-pattern>/Stagiaire/StagiaireListeParcours</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>StagiaireVisualiseQuestionnaire</servlet-name>
     <servlet-class>servlets.StagiaireVisualiseQuestionnaire</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StagiaireVisualiseQuestionnaire</servlet-name>
-    <url-pattern>/StagiaireVisualiseQuestionnaire</url-pattern>
+    <url-pattern>/Stagiaire/StagiaireVisualiseQuestionnaire</url-pattern>
   </servlet-mapping>
-
 </web-app>

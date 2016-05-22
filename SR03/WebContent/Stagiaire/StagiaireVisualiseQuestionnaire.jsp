@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		
-		<%@ include file="NavBar.jsp" %>
+		<%@ include file="/WEB-INF/NavBar.jsp" %>
 		<div class="container">
 		     
 		<h3 class="header col s12 orange-text">Qestionnaire n° ${ questionnaire.id } : "${ questionnaire.sujet }"</h3>
@@ -19,27 +19,29 @@
 	    <div class="row">
 	    <fieldset>
              <legend>${ question.text }</legend>
-	    	 <form method="post" action="StagiaireEffectuerQuestionnaire">
+	    	 <form method="post" action="RepondreQuestion">
 
 	                   <c:forEach items="${ question.LReponses }" var="reponse" varStatus="boucle">
 	                   		<p>
-		                    <input type="radio" id="${ reponse.id }" name="reponse" value="${ reponse.id }"/>
-	 						<label class="active" for="${ reponse.id }">${ reponse.text } </label>
+		                    <input type="radio" id="${ reponse.id }" name="${ question.id }" value="${ reponse.id }"/>
+	 						<label class="active" for="${ reponse.id }">${ reponse.text } ${ reponse.estValide == 'oui' ? "(Bonne réponse)" : ""  } </label>
 	 						</p>
 	 					</c:forEach>
 	 					<br>
-	 					<input type="submit" value="Valider"  />
 	                           
 	            </form>
 	            </fieldset>
 	            <br>
 	            </div>
 	   </c:forEach>
+	   
+	   <p>Vous avez fait un score de ${ score } sur ${nb_questions}. </p>
+	   <p>Pour une durée de : ${ duree } millisecondes</p>
       	
 	   </div>
 	  	
 	   
-	   <%@ include file="footer.jsp" %>
+	   <%@ include file="/WEB-INF/footer.jsp" %>
 	   
 	</body>
 </html>
