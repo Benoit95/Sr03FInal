@@ -69,6 +69,13 @@ public class SGestionQuestions extends HttpServlet {
 			String QuestIDToDeleteS = getValeurParametre( request, PARAM_QUEST_TO_DELETE);
 			int QuestionnaireID = Integer.parseInt(getValeurParametre( request, PARAM_QUESTIONNAIRE));
 
+			if (getValeurParametre( request, PAGE) == null)
+				// On récupère la valeur de la page actuelle en session.
+				pageI = (int) session.getAttribute(PAGE);
+			else
+				// On récupère la valeur de la page actuelle dans la requete
+				pageI = Integer.parseInt(getValeurParametre( request, PAGE));
+			
 			// Si paramètre de suppression reçu :
 			if (QuestIDToDeleteS != null){
 				int QuestIDToDelete = Integer.parseInt(QuestIDToDeleteS);
@@ -83,14 +90,9 @@ public class SGestionQuestions extends HttpServlet {
 						resultat = e.getMessage();
 					}
 				}
-				// On récupère la valeur de la page actuelle en session.
-				pageI = (int) session.getAttribute(PAGE); 
+
 				
 				resultat = "Suppression de la question effectuée avec succès";
-			}else{
-				// On récupère la valeur de la page actuelle dans la requete
-				pageI = Integer.parseInt(getValeurParametre( request, PAGE));
-
 			}
 
 			/* on récupère la liste des questions */

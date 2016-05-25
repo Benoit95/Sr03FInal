@@ -1,6 +1,5 @@
 package forms;
 
-import dao.DAOException;
 
 public class creationUserForm {
 
@@ -41,5 +40,5 @@ public class creationUserForm {
             throw new Exception( "Merci d'entrer un numéro de téléphone valide." );
         }
     }
-	
+
 }

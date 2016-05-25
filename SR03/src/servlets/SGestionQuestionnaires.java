@@ -63,6 +63,13 @@ public class SGestionQuestionnaires extends HttpServlet {
 			/* Récupération des paramètres (si suppression/modification demandé) */
 			String QuestIDToDeleteS = getValeurParametre( request, PARAM_QUEST_TO_DELETE);
 
+			if (getValeurParametre( request, PAGE) == null)
+				// On récupère la valeur de la page actuelle en session.
+				pageI = (int) session.getAttribute(PAGE);
+			else
+				// On récupère la valeur de la page actuelle dans la requete
+				pageI = Integer.parseInt(getValeurParametre( request, PAGE));
+			
 			// Si paramètre de suppression reçu :
 			if (QuestIDToDeleteS != null){
 				
@@ -80,14 +87,9 @@ public class SGestionQuestionnaires extends HttpServlet {
 						resultat = e.getMessage();
 					}
 				}
-				// On récupère la valeur de la page actuelle en session.
-				pageI = (int) session.getAttribute(PAGE);
 				
 				resultat = "Suppression réussie";
 				
-			}else{
-				// On récupère la valeur de la page actuelle dans la requete
-				pageI = Integer.parseInt(getValeurParametre( request, PAGE));
 			}
 
 			/* on récupère la liste des questionnaires */
@@ -131,7 +133,6 @@ public class SGestionQuestionnaires extends HttpServlet {
 		} catch ( Exception e ) {
 			erreurs.put( CHAMP_SUJET_A, e.getMessage() );
 		}
-
 
 		/* Initialisation du résultat global de la validation. */
 		if ( erreurs.isEmpty() ) {

@@ -13,7 +13,6 @@
        <!-- NavBar -->
        <nav class="light-blue lighten-1 fixed" role="navigation">
            <div class="nav-wrapper container">
-               <img class="responsive-img" src="UTC_logo.png" alt="Photo_non_disponible_mini.png">
                <c:if test="${empty sessionScope.sessionUtilisateur}">
 	               <ul class="right hide-on-med-and-down">
 	                   <li><a href="login">Se connecter</a></li>

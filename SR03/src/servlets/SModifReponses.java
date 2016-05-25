@@ -18,7 +18,7 @@ import forms.ReponseForm;
 public class SModifReponses extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String AFFICHAGE          = "/Admin/ModifReponses.jsp";
-	public static final String AFFICHAGEGestion   = "/Admin/GestionReponses.jsp";
+	public static final String AFFICHAGEGestion   = "GestionReponses";
 	public static final String CONF_DAO_FACTORY = "daofactory";
 
 	public static final String CHAMP_IDQuestion_A = "IdQuestion";
@@ -34,8 +34,6 @@ public class SModifReponses extends HttpServlet {
 	public static final String ATT_Question= "QuestionID";
 	public static final String ATT_LIST_Reponses = "L_Reponses";
 	public static final String ATT_QUEST_TO_MODIF   = "rep_to_modif";
-	public static final String ATT_ERREURS  = "erreurs";
-	public static final String ATT_RESULTAT = "resultat";
 
 	private ReponseDAO     ReponseDAO;
 	List<Reponse> L_Reponses;
@@ -130,20 +128,9 @@ public class SModifReponses extends HttpServlet {
 			resultat = "Échec de modification.";
 		}
 
-		/* Stockage du résultat et des messages d'erreur dans l'objet request */
-
-		/* on récupère la liste des utilisateurs */
-		L_Reponses = ReponseDAO.lister(Integer.parseInt(IdQuestion));
-
-		/* on la passe en attribut à la requete */
-		request.setAttribute( ATT_LIST_Reponses, L_Reponses );
-
-		request.setAttribute( ATT_ERREURS, erreurs );
-		request.setAttribute( ATT_RESULTAT, resultat );
-
 		/* Actualisation de la page */
 		if ( erreurs.isEmpty() )
-			this.getServletContext().getRequestDispatcher( AFFICHAGEGestion ).forward( request, response );
+			response.sendRedirect(AFFICHAGEGestion+"?"+ATT_Question+"="+IdQuestion);
 		else
 			this.getServletContext().getRequestDispatcher( AFFICHAGE ).forward( request, response );
 	}

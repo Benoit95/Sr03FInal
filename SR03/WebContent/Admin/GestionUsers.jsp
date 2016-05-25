@@ -18,7 +18,7 @@
         
         <div class="container">
         <fieldset>
-        <h5 class="header col s12 light">Utilisateurs</h5>
+        <h5 class="header col s12 light">Liste des utilisateurs</h5>
         <div id="corps">
         <c:choose>
             <%-- Si aucun utilisateur n'existe en session, affichage d'un message par défaut. --%>
@@ -38,7 +38,8 @@
                     <th>Date de création</th>
                     <th>Statut du compte</th>
                     <th class="action">Suppression</th>
-                    <th class="action">Modification</th>                   
+                    <th class="action">Modification</th>
+                    <th class="action">Parcours</th>                    
                 </tr></thead>
                 <%-- Parcours de la Map des Users dans la requete, et utilisation de l'objet varStatus. --%>
                 <tbody>
@@ -61,6 +62,12 @@
                     <td class="action">
                         <a href="<c:url value="GestionUser"><c:param name="mailUser_to_modif" value="${ mapUsers.mail }" /></c:url>">Modifier</a>
                     </td>
+                    <td class="action">
+				        <c:if test="${mapUsers.admin  == false}">
+					   		<a href="<c:url value="/Admin/AdminListeParcours"><c:param name="StagiaireID" value="${ mapUsers.id }" /><c:param name="page" value="1" /></c:url>">Visualiser</a>
+				        </c:if>
+                    </td>
+                    
                 </tr>
                 </c:forEach>
                 </tbody>

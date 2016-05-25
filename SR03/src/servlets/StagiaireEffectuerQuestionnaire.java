@@ -170,7 +170,7 @@ public class StagiaireEffectuerQuestionnaire extends HttpServlet {
 			if (pageI >= pageMax){
 				
 				// Si un parcours de ce questionnaire a deja été enregistrer
-				if (parcoursDAO.trouver_Parcours_User(user_co.getId(), questionnaire.getId()) != null) // Si parcorus deja présent
+				if (parcoursDAO.trouver_Parcours_User(user_co.getId(), questionnaire.getId()).size() != 0) // Si parcorus deja présent
 					parcoursDAO.supprimer(p); // on le supprime
 				
 				// on sauvegarde le parcours en BDD.

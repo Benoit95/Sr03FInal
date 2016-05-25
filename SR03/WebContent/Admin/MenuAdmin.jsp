@@ -11,6 +11,8 @@
 	</head>
 	
 	<body>
+	
+	<!--  
 	<br><br>
 		<aside>
 			<div class="container">
@@ -23,5 +25,7 @@
 				<br><br><br>
 			</div>
 		</aside>
+		-->
+		
 	</body>
 </html>

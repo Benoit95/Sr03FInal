@@ -19,8 +19,8 @@ public class SLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String CONF_DAO_FACTORY = "daofactory";
     public static final String LOGIN          = "/WEB-INF/login.jsp";
-    public static final String ADMIN          = "Admin/admin";
-    public static final String STAGIAIRE      = "Stagiaire/stagiaire";
+    public static final String ADMIN          = "Admin/GestionQuestionnaires";
+    public static final String STAGIAIRE      = "Stagiaire/StagiaireListeQuestionnaire";
     public static final String CHAMP_EMAIL  = "emailUser";
     public static final String CHAMP_PASS   = "mdpUser";
     
@@ -28,6 +28,7 @@ public class SLogin extends HttpServlet {
     public static final String ATT_RESULTAT = "resultat";
     public static final String ATT_UTILISATEUR = "utilisateur";
     
+    public static final String ATT_SESSION_PAGE = "page";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
     public static final String ATT_SESSION_NB_USER_PAGE = "sessionUserPage";
     public static final String ATT_SESSION_NB_QUESTIONNAIRE_PAGE = "sessionQuestionnairePage";
@@ -105,6 +106,7 @@ public class SLogin extends HttpServlet {
         }else{
         	// Si l'utilisateur est correct
         	session.setAttribute( ATT_SESSION_USER, connectedUser );
+        	session.setAttribute(ATT_SESSION_PAGE, 1);
         	
         	session.setAttribute( ATT_SESSION_NB_USER_PAGE, 5 );
         	session.setAttribute( ATT_SESSION_NB_QUESTIONNAIRE_PAGE, 3 );
@@ -132,6 +134,9 @@ public class SLogin extends HttpServlet {
 			connectedUser = utilisateurDao.trouver_byMailMDp( email, motDePasse );
 			if(connectedUser == null)
 				throw new Exception("Votre mdp ne correspond pas à votre identifiant (mail)");
+			else if(connectedUser.getStatut().contentEquals("inactif"))
+				throw new Exception("Ce compte est inactif");
 		}
+		
 	}
 }

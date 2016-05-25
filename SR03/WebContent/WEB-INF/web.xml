@@ -199,4 +199,13 @@
     <servlet-name>StagiaireVisualiseQuestionnaire</servlet-name>
     <url-pattern>/Stagiaire/StagiaireVisualiseQuestionnaire</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>AdminListeParcours</servlet-name>
+    <servlet-class>servlets.AdminListeParcours</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminListeParcours</servlet-name>
+    <url-pattern>/Admin/AdminListeParcours</url-pattern>
+  </servlet-mapping>
 </web-app>

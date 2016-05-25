@@ -15,6 +15,7 @@ import beans.Utilisateur;
 public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	private static final String SQL_SELECT = "SELECT * FROM Utilisateur";
+	private static final String SQL_SELECT_PAR_ID = "SELECT * FROM Utilisateur WHERE id = ?";
     private static final String SQL_SELECT_PAR_EMAIL = "SELECT * FROM Utilisateur WHERE email = ?";
     private static final String SQL_SELECT_PAR_EMAIL_ET_MDP = "SELECT * FROM Utilisateur WHERE email = ? AND mot_de_passe = ?";
     private static final String SQL_INSERT           = "INSERT INTO Utilisateur (admin, email, mot_de_passe, nom, prenom, societe, tel, statut_cpt, date_creation) VALUES (?,?, ?, ?, ?, ?, ?, ?, NOW())";
@@ -35,6 +36,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public Utilisateur trouver_byMailMDp(String email, String mdp) throws DAOException {
 		return trouver( SQL_SELECT_PAR_EMAIL_ET_MDP, email, mdp );
+	}
+	
+	@Override
+	public Utilisateur trouver_byID(long id) throws DAOException {
+		return trouver( SQL_SELECT_PAR_ID, id );
 	}
 
     @Override
@@ -183,4 +189,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         utilisateur.setStatut( resultSet.getString( "statut_cpt" ) );
         return utilisateur;
     }
+
+
 }

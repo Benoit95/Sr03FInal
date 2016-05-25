@@ -18,7 +18,9 @@
 		         
 		        <c:if test="${!empty sessionScope.sessionUtilisateur}">
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
-                    <h5 class="header col s12 light"> Vous êtes déjà connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.mail}</h5>
+                    <h5 class="header col s12 light"> Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.mail}</h5>
+                    Vous avez seulement accès à la partie : <c:if test="${sessionScope.sessionUtilisateur.admin}"> Admin</c:if>
+                    										<c:if test="${!sessionScope.sessionUtilisateur.admin}"> Stagiaire</c:if>
                 </c:if>
                 
 		        <c:if test="${empty sessionScope.sessionUtilisateur}">

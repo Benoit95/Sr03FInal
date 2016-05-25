@@ -6,6 +6,8 @@ import beans.Utilisateur;
 
 public interface UtilisateurDao {
 
+	Utilisateur trouver_byID( long id ) throws DAOException;
+	
     Utilisateur trouver_byMail( String email ) throws DAOException;
     
     Utilisateur trouver_byMailMDp( String email, String mdp ) throws DAOException;
